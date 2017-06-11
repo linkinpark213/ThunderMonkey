@@ -57,18 +57,32 @@ public class Controller {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
             objectOutputStream.writeObject(new Message(Message.ANSWER, ""));
             startConversation();
+            callButton.setDisable(true);
+            hangButton.setDisable(false);
         } catch (IOException e) {
-            e.printStackTrace();
+            statusText.setText("The Other User Canceled Calling.");
+            System.out.println("The Other User Canceled Calling.");
+            currentState = WAITING_FOR_CALL;
+            callButton.setDisable(false);
+            hangButton.setDisable(true);
         }
-        callButton.setDisable(true);
-        hangButton.setDisable(false);
     }
 
     public void cancelDialing() {
         if (this.currentState == IN_CONVERSATION) {
             hangOff();
-        } else
+        } else {
+            try {
+                conversationSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             this.currentState = WAITING_FOR_CALL;
+            statusText.setText("You Canceled Calling.");
+            System.out.println("You Canceled Calling.");
+            callButton.setDisable(false);
+            hangButton.setDisable(true);
+        }
     }
 
     public void hangOff() {
