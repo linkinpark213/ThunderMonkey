@@ -54,6 +54,7 @@ public class Conversation {
     public void recordAndSend() {
         byte[] record = recorder.record();
         DatagramPacket datagramPacket = new DatagramPacket(record, record.length, socket.getInetAddress(), remoteDatagramPort);
+        System.out.println("Datagram Sent to " + remoteDatagramPort);
         try {
             datagramSocket.send(datagramPacket);
         } catch (IOException e) {
