@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="previous work">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/AnswerListenerThread.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Listener.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/%HOMEDRIVE%%HOMEPATH%/.bash_history" afterPath="$PROJECT_DIR$/%HOMEDRIVE%%HOMEPATH%/.bash_history" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/ConversationControlThread.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/ConversationControlThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Dialer.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Dialer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Main.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/receiver/ReceiverThread.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/receiver/ReceiverThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/common/Message.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/common/Message.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,8 +68,8 @@
           <file leaf-file-name="Conversation.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="469">
-                  <caret line="50" column="25" lean-forward="false" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
+                <state relative-caret-position="648">
+                  <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -85,21 +77,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ConversationControlThread.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/ConversationControlThread.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="504">
-                  <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CallInListenerThread.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="CallInListenerThread.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="181">
-                  <caret line="35" column="46" lean-forward="false" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
+                <state relative-caret-position="469">
+                  <caret line="23" column="90" lean-forward="true" selection-start-line="23" selection-start-column="90" selection-end-line="23" selection-end-column="90" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -119,15 +101,16 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="517">
-                  <caret line="73" column="40" lean-forward="false" selection-start-line="73" selection-start-column="40" selection-end-line="73" selection-end-column="40" />
+                <state relative-caret-position="685">
+                  <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#2497#2498#0" expanded="true" />
-                    <element signature="e#2544#2545#0" expanded="true" />
+                    <element signature="e#2542#2543#0" expanded="true" />
+                    <element signature="e#2589#2590#0" expanded="true" />
+                    <element signature="e#2876#2877#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -173,8 +156,8 @@
           <file leaf-file-name="ReceiverThread.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/receiver/ReceiverThread.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="530">
-                  <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+                <state relative-caret-position="888">
+                  <caret line="43" column="40" lean-forward="true" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
                   <folding />
                 </state>
               </provider>
@@ -283,8 +266,8 @@
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/ConversationControlThread.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/AnswerListenerThread.java" />
-        <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/receiver/ReceiverThread.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java" />
+        <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/receiver/ReceiverThread.java" />
       </list>
     </option>
   </component>
@@ -911,7 +894,7 @@
       <workItem from="1493890489154" duration="1214000" />
       <workItem from="1494170286465" duration="599000" />
       <workItem from="1494209581855" duration="58000" />
-      <workItem from="1497153889490" duration="13935000" />
+      <workItem from="1497153889490" duration="14768000" />
     </task>
     <task id="LOCAL-00001" summary="Second Initial Commit">
       <created>1493626748026</created>
@@ -934,11 +917,18 @@
       <option name="project" value="LOCAL" />
       <updated>1497154555701</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="at least i can finally speak">
+      <created>1497167934326</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1497167934326</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33288000" />
+    <option name="totallyTimeSpent" value="34121000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -975,7 +965,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3988563" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2523231" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1037,11 +1027,12 @@
     <MESSAGE value="Second Initial Commit" />
     <MESSAGE value="Not finished yet" />
     <MESSAGE value="mission heavy and road far" />
-    <option name="LAST_COMMIT_MESSAGE" value="mission heavy and road far" />
+    <MESSAGE value="at least i can finally speak" />
+    <option name="LAST_COMMIT_MESSAGE" value="at least i can finally speak" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1066,8 +1057,9 @@
           <caret line="44" column="38" lean-forward="false" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2497#2498#0" expanded="true" />
-            <element signature="e#2544#2545#0" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
+            <element signature="e#2876#2877#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1117,8 +1109,9 @@
           <caret line="44" column="38" lean-forward="false" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2497#2498#0" expanded="true" />
-            <element signature="e#2544#2545#0" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
+            <element signature="e#2876#2877#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1378,16 +1371,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="35" column="46" lean-forward="false" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="554">
@@ -1409,13 +1392,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java">
+    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="50" column="25" lean-forward="false" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
+        <state relative-caret-position="685">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
+            <element signature="e#2876#2877#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/receiver/ReceiverThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="888">
+          <caret line="43" column="40" lean-forward="true" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1427,23 +1421,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="73" column="40" lean-forward="false" selection-start-line="73" selection-start-column="40" selection-end-line="73" selection-end-column="40" />
+        <state relative-caret-position="648">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2497#2498#0" expanded="true" />
-            <element signature="e#2544#2545#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/receiver/ReceiverThread.java">
+    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="469">
+          <caret line="23" column="90" lean-forward="true" selection-start-line="23" selection-start-column="90" selection-end-line="23" selection-end-column="90" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

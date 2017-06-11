@@ -47,7 +47,7 @@ public class ReceiverThread extends Thread {
             case Message.HANG_OFF:
             default:
                 controller.callingEnd();
-                System.out.println("Phone Call Was Hung Off");
+                System.out.println("Phone Call Was Hung Off.");
         }
     }
 
@@ -62,7 +62,7 @@ public class ReceiverThread extends Thread {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 

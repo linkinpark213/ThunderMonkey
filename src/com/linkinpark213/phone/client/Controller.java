@@ -64,6 +64,8 @@ public class Controller {
     }
 
     public void hangOff() {
+        currentState = WAITING_FOR_CALL;
+        System.out.println("You hung off.");
         ObjectOutputStream objectOutputStream = null;
         try {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
@@ -71,7 +73,6 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        currentState = WAITING_FOR_CALL;
     }
 
     public void callingEnd() {
