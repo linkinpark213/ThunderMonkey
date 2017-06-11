@@ -24,11 +24,11 @@ public class Dialer extends Thread {
         this.socket = socket;
     }
 
-    public Socket dial(String address, int port) {
+    public Socket dial(String address, int port, int datagramPort) {
         try {
             socket = new Socket(address, port);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            objectOutputStream.writeObject(new Message(Message.CALL_REQUEST, ""));
+            objectOutputStream.writeObject(new Message(Message.CALL_REQUEST, datagramPort));
             return socket;
         } catch (IOException e) {
             return null;

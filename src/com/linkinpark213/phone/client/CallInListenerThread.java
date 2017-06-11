@@ -3,6 +3,7 @@ package com.linkinpark213.phone.client;
 import com.linkinpark213.phone.common.Message;
 
 import java.io.*;
+import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -13,21 +14,40 @@ public class CallInListenerThread extends Thread {
     * NOT the same as the receiver!
     * */
     private ServerSocket serverSocket;
+    private DatagramSocket datagramSocket;
     private Socket socket;
     private ConversationControlThread conversationControlThread;
     private Controller controller;
 
     public CallInListenerThread(Controller controller) {
-        try {
-            this.controller = controller;
-            serverSocket = new ServerSocket(1024 + (int) (Math.random() * 32768));
-            System.out.println("Server Listening on Port " + serverSocket.getLocalPort());
-            System.out.println("Waiting for call");
-            System.out.println("Local IP Address: " + serverSocket.getLocalSocketAddress() + "  Port: " + serverSocket.getLocalPort());
-            controller.setLocalStatus("Local Port: " + serverSocket.getLocalPort());
-        } catch (IOException e) {
-            System.out.println("Failed to Open Listening Socket.");
+        this.controller = controller;
+        boolean shouldGetNewSocket = true;
+        while (shouldGetNewSocket) {
+            try {
+                serverSocket = new ServerSocket(1024 + (int) (Math.random() * 32768));
+                shouldGetNewSocket = false;
+            } catch (IOException e) {
+                System.out.println("Failed to Get a Port for Listening Socket. Retrying...");
+            }
         }
+        System.out.println("Server Listening on Port " + serverSocket.getLocalPort());
+        System.out.println("Waiting for call");
+        System.out.println("Local IP Address: " + serverSocket.getLocalSocketAddress() + "  Port: " + serverSocket.getLocalPort());
+
+        shouldGetNewSocket = true;
+        while (shouldGetNewSocket) {
+            try {
+                datagramSocket = new DatagramSocket(1024 + (int) (Math.random() * 32768));
+                shouldGetNewSocket = false;
+            } catch (SocketException e) {
+                shouldGetNewSocket = true;
+            }
+        }
+        controller.setDatagramSocket(datagramSocket);
+        System.out.println("UDP Port: " + datagramSocket.getLocalPort());
+
+        controller.setLocalStatus("Local Control Port: " + serverSocket.getLocalPort() +
+                "\nLocal Transfer Port: " + datagramSocket.getLocalPort());
     }
 
     @Override
@@ -45,8 +65,9 @@ public class CallInListenerThread extends Thread {
                             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                             Message message = (Message) objectInputStream.readObject();
                             if (message.getType() == Message.CALL_REQUEST) {
-                                System.out.println("Call coming From " + socket.getRemoteSocketAddress());
-                                controller.callIncoming(socket);
+                                System.out.println("Call coming From " + socket.getRemoteSocketAddress()
+                                        + "\nRemote Datagram Socket is " + message.getDatagramPort());
+                                controller.callIncoming(socket, message.getDatagramPort());
                             }
                         }
                     } catch (SocketException e) {

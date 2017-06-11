@@ -6,10 +6,12 @@ package com.linkinpark213.phone.client;
 public class ConversationControlThread extends Thread {
     private Controller controller;
     private Conversation conversation;
+    private int remoteDatagramPort;
 
-    public ConversationControlThread(Conversation conversation, Controller controller) {
+    public ConversationControlThread(Conversation conversation, Controller controller, int remoteDatagramPort) {
         this.conversation = conversation;
         this.controller = controller;
+        this.remoteDatagramPort = remoteDatagramPort;
     }
 
     @Override

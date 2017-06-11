@@ -20,6 +20,16 @@ public class Message implements Serializable {
     public final static int CALL_CANCEL = 5;
     private int type;
     private String content;
+    private int datagramPort;
+
+    public int getDatagramPort() {
+        return datagramPort;
+    }
+
+    public void setDatagramPort(int datagramPort) {
+        this.datagramPort = datagramPort;
+    }
+
     private byte[] audioByteArray;
 
     public String getContent() {
@@ -50,11 +60,20 @@ public class Message implements Serializable {
         this.type = type;
         this.content = content;
         this.audioByteArray = null;
+        this.datagramPort = 0;
+    }
+
+    public Message(int type, int port) {
+        this.type = type;
+        this.content = "";
+        this.audioByteArray = null;
+        this.datagramPort = port;
     }
 
     public Message(String content, byte[] bytes) {
         this.type = SPEAK;
         this.content = content;
         this.audioByteArray = bytes;
+        this.datagramPort = 0;
     }
 }

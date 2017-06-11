@@ -7,6 +7,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.DatagramSocket;
 import java.net.Socket;
 
 
@@ -21,8 +22,10 @@ public class Controller {
     private Dialer dialer;
     private Conversation conversation;
     private Socket conversationSocket;
+    private DatagramSocket datagramSocket;
     private AnswerListenerThread answerListenerThread;
     private int currentState;
+    private int remoteDatagramPort;
     public static final int IN_CONVERSATION = 0;
     public static final int WAITING_FOR_CALL = 1;
     public static final int WAITING_FOR_ANSWER = 2;
@@ -42,8 +45,10 @@ public class Controller {
         this.dialer = new Dialer();
     }
 
-    public void callIncoming(Socket socket) {
-        statusText.setText("Call incoming from " + socket.getRemoteSocketAddress() + socket.getPort());
+    public void callIncoming(Socket socket, int datagramPort) {
+        remoteDatagramPort = datagramPort;
+        statusText.setText("Call incoming from " + socket.getRemoteSocketAddress() + socket.getPort()
+                + "\nRemote Datagram Socket is " + datagramPort);
         this.currentState = CALL_INCOMING;
         conversationSocket = socket;
         hangButton.setDisable(false);
@@ -55,7 +60,7 @@ public class Controller {
         ObjectOutputStream objectOutputStream = null;
         try {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
-            objectOutputStream.writeObject(new Message(Message.ANSWER, ""));
+            objectOutputStream.writeObject(new Message(Message.ANSWER, datagramSocket.getLocalPort()));
             startConversation();
             callButton.setDisable(true);
             hangButton.setDisable(false);
@@ -129,26 +134,6 @@ public class Controller {
         hangButton.setDisable(true);
     }
 
-    public boolean isListening() {
-        return currentState == WAITING_FOR_CALL;
-    }
-
-    public boolean isBeingCalled() {
-        return currentState == CALL_INCOMING;
-    }
-
-    public boolean isWaitingForAnswer() {
-        return currentState == WAITING_FOR_ANSWER;
-    }
-
-    public boolean isInConversation() {
-        return currentState == IN_CONVERSATION;
-    }
-
-    public void keepListening() {
-        this.currentState = WAITING_FOR_CALL;
-    }
-
     public void waitForCall() {
         this.currentState = WAITING_FOR_CALL;
         callButton.setDisable(false);
@@ -169,8 +154,8 @@ public class Controller {
     }
 
     public void startConversation() {
-        conversation = new Conversation(conversationSocket);
-        ConversationControlThread conversationControlThread = new ConversationControlThread(conversation, this);
+        conversation = new Conversation(conversationSocket, remoteDatagramPort);
+        ConversationControlThread conversationControlThread = new ConversationControlThread(conversation, this, remoteDatagramPort);
         ReceiverThread receiverThread = new ReceiverThread(conversation, this);
         conversationControlThread.start();
         receiverThread.start();
@@ -201,8 +186,36 @@ public class Controller {
         localStatusText.setText(localStatus);
     }
 
+    public DatagramSocket getDatagramSocket() {
+        return datagramSocket;
+    }
+
+    public void setDatagramSocket(DatagramSocket datagramSocket) {
+        this.datagramSocket = datagramSocket;
+    }
+
+    public boolean isListening() {
+        return currentState == WAITING_FOR_CALL;
+    }
+
+    public boolean isBeingCalled() {
+        return currentState == CALL_INCOMING;
+    }
+
+    public boolean isWaitingForAnswer() {
+        return currentState == WAITING_FOR_ANSWER;
+    }
+
+    public boolean isInConversation() {
+        return currentState == IN_CONVERSATION;
+    }
+
+    public void keepListening() {
+        this.currentState = WAITING_FOR_CALL;
+    }
+
     public boolean dial(String address, int port) {
-        Socket socket = dialer.dial(address, port);
+        Socket socket = dialer.dial(address, port, datagramSocket.getLocalPort());
         System.out.println("Local Address & Port: " + socket.getLocalAddress() + ":" + socket.getLocalPort());
         if (socket != null) {
             this.waitForAnswer(socket);

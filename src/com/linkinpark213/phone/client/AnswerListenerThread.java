@@ -41,7 +41,7 @@ public class AnswerListenerThread extends Thread {
                         controller.callingRefused();
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Socket Closed.");
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }

@@ -20,10 +20,12 @@ import java.net.Socket;
 public class Conversation {
     private Socket socket;
     private Recorder recorder;
+    private int remoteDatagramPort;
     private ConversationControlThread conversationControlThread;
 
-    public Conversation(Socket socket) {
+    public Conversation(Socket socket, int remoteDatagramPort) {
         this.socket = socket;
+        this.remoteDatagramPort = remoteDatagramPort;
         recorder = new Recorder("cache\\" + socket.getLocalPort());
     }
 
