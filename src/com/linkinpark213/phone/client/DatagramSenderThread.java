@@ -25,5 +25,6 @@ public class DatagramSenderThread extends Thread {
         while (controller.isInConversation()) {
             conversation.recordAndSend();
         }
+        conversation.close();
     }
 }

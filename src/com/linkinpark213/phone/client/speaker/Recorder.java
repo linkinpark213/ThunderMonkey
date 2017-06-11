@@ -37,4 +37,8 @@ public class Recorder {
         targetDataLine.read(buffer, 0, buffer.length);
         return buffer;
     }
+
+    public void close() {
+        targetDataLine.close();
+    }
 }

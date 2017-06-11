@@ -39,4 +39,7 @@ public class Player {
         sourceDataLine.write(record, 0, record.length);
     }
 
+    public void close() {
+        sourceDataLine.close();
+    }
 }

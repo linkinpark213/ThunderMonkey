@@ -27,7 +27,7 @@ public class Conversation {
         this.socket = socket;
         this.remoteDatagramPort = remoteDatagramPort;
         try {
-            this.datagramSocket = new DatagramSocket(socket.getRemoteSocketAddress());
+            this.datagramSocket = new DatagramSocket();
         } catch (SocketException e) {
             e.printStackTrace();
         }
@@ -59,6 +59,10 @@ public class Conversation {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void close() {
+        recorder.close();
     }
 
 }

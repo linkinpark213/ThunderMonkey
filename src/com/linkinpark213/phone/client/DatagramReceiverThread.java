@@ -42,5 +42,6 @@ public class DatagramReceiverThread extends Thread {
                 e.printStackTrace();
             }
         }
+        player.close();
     }
 }
