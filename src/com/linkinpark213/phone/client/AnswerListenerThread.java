@@ -33,6 +33,7 @@ public class AnswerListenerThread extends Thread {
                     if (message.getType() == Message.ANSWER) {
                         System.out.println("Connection Established With " + socket.getRemoteSocketAddress());
                         System.out.println("" + socket.getRemoteSocketAddress() + " Answered.");
+                        controller.setRemoteDatagramPort(message.getDatagramPort());
                         controller.startConversation();
                     } else if (message.getType() == Message.CALL_REFUSE) {
                         System.out.println("" + socket.getRemoteSocketAddress() + " Refused to Answer.");

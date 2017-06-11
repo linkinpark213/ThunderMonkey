@@ -26,6 +26,7 @@ public class CallInListenerThread extends Thread {
             try {
                 serverSocket = new ServerSocket(1024 + (int) (Math.random() * 32768));
                 shouldGetNewSocket = false;
+                controller.setServerSocket(serverSocket);
             } catch (IOException e) {
                 System.out.println("Failed to Get a Port for Listening Socket. Retrying...");
             }

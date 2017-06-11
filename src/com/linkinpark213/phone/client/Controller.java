@@ -7,6 +7,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.DatagramSocket;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 
@@ -21,6 +22,7 @@ public class Controller {
     private Dialer dialer;
     private Conversation conversation;
     private Socket conversationSocket;
+    private ServerSocket serverSocket;
     private DatagramSocket datagramSocket;
     private AnswerListenerThread answerListenerThread;
     private int currentState;
@@ -196,6 +198,14 @@ public class Controller {
         this.datagramSocket = datagramSocket;
     }
 
+    public void setServerSocket(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
+    }
+
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
     public boolean isListening() {
         return currentState == WAITING_FOR_CALL;
     }
@@ -216,15 +226,23 @@ public class Controller {
         this.currentState = WAITING_FOR_CALL;
     }
 
+    public int getRemoteDatagramPort() {
+        return remoteDatagramPort;
+    }
+
+    public void setRemoteDatagramPort(int remoteDatagramPort) {
+        this.remoteDatagramPort = remoteDatagramPort;
+    }
+
     public boolean dial(String address, int port) {
         Socket socket = dialer.dial(address, port, datagramSocket.getLocalPort());
-        System.out.println("Local Address & Port: " + socket.getLocalAddress() + ":" + socket.getLocalPort());
         if (socket != null) {
+            System.out.println("Local Address & Port: " + socket.getLocalAddress() + ":" + socket.getLocalPort());
             this.waitForAnswer(socket);
             return true;
         } else {
-            System.out.println("Dialing Error: No Answerer.");
-            statusText.setText("Dialing Error: No Answerer.");
+            System.out.println("Dialing Error: Remote Answerer Address Not Found.");
+            statusText.setText("Dialing Error: Remote Answerer Address Not Found.");
             return false;
         }
     }

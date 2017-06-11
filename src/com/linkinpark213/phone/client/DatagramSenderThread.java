@@ -13,7 +13,8 @@ public class DatagramSenderThread extends Thread {
     private Controller controller;
     private Conversation conversation;
     private int remoteDatagramPort;
-    public DatagramSenderThread (Conversation conversation, Controller controller, int remoteDatagramPort) {
+
+    public DatagramSenderThread(Conversation conversation, Controller controller, int remoteDatagramPort) {
         this.conversation = conversation;
         this.controller = controller;
         this.remoteDatagramPort = remoteDatagramPort;
@@ -23,7 +24,6 @@ public class DatagramSenderThread extends Thread {
     public void run() {
         while (controller.isInConversation()) {
             conversation.recordAndSend();
-            System.out.println("Datagram Sent.");
         }
     }
 }

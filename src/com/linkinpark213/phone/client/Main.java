@@ -100,10 +100,14 @@ public class Main extends Application {
                     String portString = portEdit.getText();
                     if (Pattern.matches("\\d{1,3}\\.\\d{1,3}.\\d{1,3}.\\d{1,3}", ipString)
                             && Pattern.matches("\\d{4,5}", portString)) {
-                        boolean isWaitingForAnswer = controller.dial(ipEdit.getText(), Integer.parseInt(portEdit.getText()));
-                        if (isWaitingForAnswer) {
-                            statusText.setText("Dialing..." + ipString + ":" + portString);
-                            System.out.println("Dialing..." + ipString + ":" + portString);
+                        if (ipString.equals("127.0.0.1") && controller.getServerSocket().getLocalPort() == Integer.parseInt(portString)) {
+                            statusText.setText("Please Do Not Try to Call Yourself.");
+                        } else {
+                            boolean isWaitingForAnswer = controller.dial(ipEdit.getText(), Integer.parseInt(portEdit.getText()));
+                            if (isWaitingForAnswer) {
+                                statusText.setText("Dialing..." + ipString + ":" + portString);
+                                System.out.println("Dialing..." + ipString + ":" + portString);
+                            }
                         }
                     } else {
                         statusText.setText("Invalid IP or Port.");
