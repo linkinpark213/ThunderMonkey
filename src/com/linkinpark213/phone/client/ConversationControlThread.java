@@ -23,6 +23,7 @@ public class ConversationControlThread extends Thread {
             }
             if (controller.isInConversation())
                 conversation.stopRecordingAndSend();
+            else conversation.stopRecordingAndDoNotSend();
         }
     }
 }

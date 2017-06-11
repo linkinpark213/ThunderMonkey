@@ -14,53 +14,54 @@ import java.net.Socket;
  * Created by ooo on 2017/5/2 0002.
  */
 public class Controller {
-    private Text[] statusTexts;
+    private Text statusText;
     private Text localStatusText;
     private Button callButton;
     private Button hangButton;
-    private CallInListenerThread callInListenerThread;
     private Dialer dialer;
     private Conversation conversation;
     private Socket conversationSocket;
+    private AnswerListenerThread answerListenerThread;
     private int currentState;
     public static final int IN_CONVERSATION = 0;
     public static final int WAITING_FOR_CALL = 1;
     public static final int WAITING_FOR_ANSWER = 2;
     public static final int CALL_INCOMING = 3;
 
-    public Controller(Text[] statusTexts,
+    public Controller(Text statusText,
                       Text localStatusText,
                       Button callButton,
                       Button hangButton) {
-        this.statusTexts = statusTexts;
+        this.statusText = statusText;
         this.localStatusText = localStatusText;
         this.callButton = callButton;
         this.hangButton = hangButton;
-        this.callInListenerThread = new CallInListenerThread(this);
+        CallInListenerThread callInListenerThread = new CallInListenerThread(this);
         currentState = WAITING_FOR_CALL;
         callInListenerThread.start();
         this.dialer = new Dialer();
     }
 
     public void callIncoming(Socket socket) {
-        for (int i = 0; i < statusTexts.length; i++) {
-            statusTexts[i].setText("Call incoming from " + socket.getRemoteSocketAddress() + socket.getPort());
-        }
+        statusText.setText("Call incoming from " + socket.getRemoteSocketAddress() + socket.getPort());
         this.currentState = CALL_INCOMING;
         conversationSocket = socket;
+        hangButton.setDisable(false);
     }
 
     public void answerCall() {
+        statusText.setText("You Answered the Phone.");
+        System.out.println("You Answered the Phone.");
         ObjectOutputStream objectOutputStream = null;
         try {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
             objectOutputStream.writeObject(new Message(Message.ANSWER, ""));
             startConversation();
-            callButton.setDisable(true);
-            hangButton.setDisable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        callButton.setDisable(true);
+        hangButton.setDisable(false);
     }
 
     public void cancelDialing() {
@@ -72,11 +73,13 @@ public class Controller {
 
     public void hangOff() {
         currentState = WAITING_FOR_CALL;
-        System.out.println("You hung off.");
+        statusText.setText("You Hung Off.");
+        System.out.println("You Hung Off.");
         ObjectOutputStream objectOutputStream = null;
         try {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
             objectOutputStream.writeObject(new Message(Message.HANG_OFF, ""));
+            conversationSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,10 +89,31 @@ public class Controller {
 
     public void callingEnd() {
         currentState = WAITING_FOR_CALL;
+        statusText.setText("The Other User Hung Off.");
+        System.out.println("The Other User Hung Off.");
+        try {
+            conversationSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         callButton.setDisable(false);
         hangButton.setDisable(true);
     }
 
+    public void refuseToAnswer() {
+        statusText.setText("You Refused to Answer.");
+        System.out.println("You Refused to Answer.");
+        ObjectOutputStream objectOutputStream = null;
+        try {
+            objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
+            objectOutputStream.writeObject(new Message(Message.CALL_REFUSE, ""));
+//            conversationSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        currentState = WAITING_FOR_CALL;
+        hangButton.setDisable(true);
+    }
 
     public boolean isListening() {
         return currentState == WAITING_FOR_CALL;
@@ -111,11 +135,23 @@ public class Controller {
         this.currentState = WAITING_FOR_CALL;
     }
 
+    public void waitForCall() {
+        this.currentState = WAITING_FOR_CALL;
+        callButton.setDisable(false);
+        hangButton.setDisable(true);
+    }
+
+    public void callingRefused() {
+        waitForCall();
+    }
+
     public void waitForAnswer(Socket socket) {
         this.currentState = WAITING_FOR_ANSWER;
         this.conversationSocket = socket;
-        AnswerListenerThread answerListenerThread = new AnswerListenerThread(this);
+        answerListenerThread = new AnswerListenerThread(this);
         answerListenerThread.start();
+        callButton.setDisable(true);
+        hangButton.setDisable(false);
     }
 
     public void startConversation() {
@@ -125,8 +161,14 @@ public class Controller {
         conversationControlThread.start();
         receiverThread.start();
         this.currentState = IN_CONVERSATION;
+        statusText.setText("Conversation Established with " + conversationSocket.getRemoteSocketAddress());
+        System.out.println("Conversation Established with " + conversationSocket.getRemoteSocketAddress());
         callButton.setDisable(true);
         hangButton.setDisable(false);
+    }
+
+    public void setStatus(String status) {
+        statusText.setText(status);
     }
 
     public Socket getConversationSocket() {
@@ -147,14 +189,13 @@ public class Controller {
 
     public boolean dial(String address, int port) {
         Socket socket = dialer.dial(address, port);
+        System.out.println("Local Address & Port: " + socket.getLocalAddress() + ":" + socket.getLocalPort());
         if (socket != null) {
             this.waitForAnswer(socket);
             return true;
         } else {
             System.out.println("Dialing Error: No Answerer.");
-            for (int i = 0; i < statusTexts.length; i++) {
-                statusTexts[i].setText("Dialing Error: No Answerer.");
-            }
+            statusText.setText("Dialing Error: No Answerer.");
             return false;
         }
     }

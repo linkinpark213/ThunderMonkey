@@ -41,7 +41,6 @@ public class CallInListenerThread extends Thread {
                     try {
                         socket = serverSocket.accept();
                         if (controller.isListening()) {
-//                            controller.stopListening();
                             System.out.println("Connection Established With " + socket.getRemoteSocketAddress());
                             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                             Message message = (Message) objectInputStream.readObject();

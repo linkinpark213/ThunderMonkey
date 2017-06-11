@@ -24,18 +24,12 @@ public class Main extends Application {
     private ConversationControlThread conversationControlThread;
     private Controller controller;
     private Socket socket;
-    private Text[] statusTexts;
+    private Text statusText;
     private Text localStatusText;
     private TextArea ipEdit;
     private TextArea portEdit;
     private VBox waitingState;
     private Scene waitingScene;
-    //    private VBox conversationState;
-//    private VBox waitingForAnswerState;
-//    private VBox callIncomingState;
-//    private Scene conversationScene;
-//    private Scene waitingForAnswerScene;
-//    private Scene callIncomingScene;
 
     public Main() {
         Font stateFont = new Font(15);
@@ -43,11 +37,8 @@ public class Main extends Application {
         portEdit = new TextArea();
         ipEdit.setFont(stateFont);
         portEdit.setFont(stateFont);
-        statusTexts = new Text[3];
-        for (int i = 0; i < statusTexts.length; i++) {
-            statusTexts[i] = new Text();
-            statusTexts[i].setFont(stateFont);
-        }
+        statusText = new Text();
+        statusText.setFont(stateFont);
         localStatusText = new Text();
         localStatusText.setFont(stateFont);
     }
@@ -57,10 +48,6 @@ public class Main extends Application {
 
         waitingState = new VBox();
         waitingState.setAlignment(Pos.CENTER);
-//        conversationState = new VBox();
-//        waitingForAnswerState = new VBox();
-//        conversationState.setAlignment(Pos.CENTER);
-//        waitingForAnswerState.setAlignment(Pos.CENTER);
 
         ipEdit.setPrefRowCount(0);
         ipEdit.setPromptText("Enter the IP address");
@@ -70,48 +57,37 @@ public class Main extends Application {
 
         Image dialImage = new Image(new FileInputStream("icon\\call.png"));
         Image hangImage = new Image(new FileInputStream("icon\\hang.png"));
+        ImageView dialImageView = new ImageView(dialImage);
+        ImageView hangImageView = new ImageView(hangImage);
+        dialImageView.setFitWidth(80);
+        dialImageView.setFitHeight(80);
+        hangImageView.setFitWidth(80);
+        hangImageView.setFitHeight(80);
 
         GridPane gridPane = new GridPane();
-        Button callButton = new Button("", new ImageView(dialImage));
-        Button hangButton = new Button("", new ImageView(hangImage));
-//        Button answerButton = new Button("Answer", new ImageView(dialImage));
-//        Button cancelButton = new Button("Cancel", new ImageView(hangImage));
+        Button callButton = new Button("", dialImageView);
+        Button hangButton = new Button("", hangImageView);
 
         Font buttonFont = new Font(25);
 
         callButton.setFont(buttonFont);
         hangButton.setFont(buttonFont);
-//        answerButton.setFont(buttonFont);
-//        cancelButton.setFont(buttonFont);
 
         callButton.setPrefSize(200, 50);
         hangButton.setPrefSize(200, 50);
         hangButton.setDisable(true);
         gridPane.add(callButton, 0, 0);
         gridPane.add(hangButton, 1, 0);
-//        answerButton.setPrefSize(200, 50);
-//        answerButton.setDisable(true);
-//        gridPane.add(answerButton, 1, 0);
-//        cancelButton.setPrefSize(400, 80);
-
         waitingState.getChildren().add(ipEdit);
         waitingState.getChildren().add(portEdit);
         waitingState.getChildren().add(gridPane);
-        waitingState.getChildren().add(statusTexts[0]);
+        waitingState.getChildren().add(statusText);
         waitingState.getChildren().add(localStatusText);
 
-//        conversationState.getChildren().add(statusTexts[1]);
-//        conversationState.getChildren().add(hangButton);
-//
-//        waitingForAnswerState.getChildren().add(statusTexts[2]);
-//        waitingForAnswerState.getChildren().add(cancelButton);
-
         waitingScene = new Scene(waitingState, 400, 300);
-//        conversationScene = new Scene(conversationState, 400, 300);
-//        waitingForAnswerScene = new Scene(waitingForAnswerState, 400, 300);
 
         this.controller = new Controller(
-                statusTexts,
+                statusText,
                 localStatusText,
                 callButton,
                 hangButton);
@@ -119,22 +95,21 @@ public class Main extends Application {
         callButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(controller.isListening()) {
+                if (controller.isListening()) {
                     String ipString = ipEdit.getText();
                     String portString = portEdit.getText();
                     if (Pattern.matches("\\d{1,3}\\.\\d{1,3}.\\d{1,3}.\\d{1,3}", ipString)
                             && Pattern.matches("\\d{4,5}", portString)) {
                         boolean isWaitingForAnswer = controller.dial(ipEdit.getText(), Integer.parseInt(portEdit.getText()));
                         if (isWaitingForAnswer) {
-                            System.out.println("Dialing...");
-//                            primaryStage.setScene(waitingForAnswerScene);
+                            statusText.setText("Dialing..." + ipString + ":" + portString);
+                            System.out.println("Dialing..." + ipString + ":" + portString);
                         }
-                    } else System.out.println("Invalid IP or Port.");
-                } else if(controller.isBeingCalled()) {
-//                    primaryStage.setScene(conversationScene);
-                    for (int i = 0; i < statusTexts.length; i++) {
-                        statusTexts[i].setText("Answering Call.");
+                    } else {
+                        System.out.println("Invalid IP or Port.");
                     }
+                } else if (controller.isBeingCalled()) {
+                    statusText.setText("Answering Call.");
                     controller.answerCall();
                 }
             }
@@ -143,15 +118,12 @@ public class Main extends Application {
         hangButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(controller.isInConversation()) {
-                    primaryStage.setScene(waitingScene);
-                    for (int i = 0; i < statusTexts.length; i++) {
-                        statusTexts[i].setText("You Hung Off.");
-                    }
+                if (controller.isInConversation()) {
                     controller.hangOff();
                 } else if (controller.isWaitingForAnswer()) {
-                    primaryStage.setScene(waitingScene);
                     controller.cancelDialing();
+                } else if (controller.isBeingCalled()) {
+                    controller.refuseToAnswer();
                 }
             }
         });
@@ -160,6 +132,13 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
+                if (controller.isBeingCalled()) {
+                    controller.refuseToAnswer();
+                } else if (controller.isWaitingForAnswer()) {
+                    controller.cancelDialing();
+                } else if (controller.isInConversation()) {
+                    controller.hangOff();
+                }
                 System.exit(0);
             }
         });

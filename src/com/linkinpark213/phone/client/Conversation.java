@@ -70,4 +70,8 @@ public class Conversation {
             e.printStackTrace();
         }
     }
+
+    public void stopRecordingAndDoNotSend() {
+        recorder.stopRecording();
+    }
 }
