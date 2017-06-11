@@ -34,9 +34,6 @@ public class ConversationControlThread extends Thread {
 
     @Override
     public void run() {
-        while (controller.isInConversation()) {
-            conversation.recordAndSend();
-        }
         try {
             while (controller.isInConversation()) {
                 ObjectInputStream inputStream = new ObjectInputStream(conversation.getSocket().getInputStream());

@@ -1,6 +1,5 @@
 package com.linkinpark213.phone.client;
 
-import com.linkinpark213.phone.client.receiver.ReceiverThread;
 import com.linkinpark213.phone.common.Message;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -47,7 +46,7 @@ public class Controller {
 
     public void callIncoming(Socket socket, int datagramPort) {
         remoteDatagramPort = datagramPort;
-        statusText.setText("Call incoming from " + socket.getRemoteSocketAddress() + socket.getPort()
+        statusText.setText("Call incoming from " + socket.getRemoteSocketAddress()
                 + "\nRemote Datagram Socket is " + datagramPort);
         this.currentState = CALL_INCOMING;
         conversationSocket = socket;
@@ -157,12 +156,12 @@ public class Controller {
         this.currentState = IN_CONVERSATION;
         conversation = new Conversation(conversationSocket, remoteDatagramPort);
         ConversationControlThread conversationControlThread = new ConversationControlThread(conversation, this, remoteDatagramPort);
-//        ReceiverThread receiverThread = new ReceiverThread(conversation, this);
         conversationControlThread.start();
         DatagramReceiverThread datagramReceiverThread = new DatagramReceiverThread(conversation, this, conversationSocket, datagramSocket);
         datagramReceiverThread.start();
+        DatagramSenderThread datagramSenderThread = new DatagramSenderThread(conversation, this, remoteDatagramPort);
+        datagramSenderThread.start();
 
-//        receiverThread.start();
         statusText.setText("Conversation Established with " + conversationSocket.getRemoteSocketAddress());
         System.out.println("Conversation Established with " + conversationSocket.getRemoteSocketAddress());
         callButton.setDisable(true);

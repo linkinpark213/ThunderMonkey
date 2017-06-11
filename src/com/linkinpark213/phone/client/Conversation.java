@@ -1,6 +1,5 @@
 package com.linkinpark213.phone.client;
 
-import com.linkinpark213.phone.client.receiver.ReceiverThread;
 import com.linkinpark213.phone.client.speaker.Recorder;
 import com.linkinpark213.phone.common.Message;
 
