@@ -69,6 +69,9 @@ public class Main extends Application {
         dialButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                String ipString = ipEdit.getText();
+                String portString = portEdit.getText();
+                if(portEdit.getText().length() > 1)
                 controller.dial(ipEdit.getText(), Integer.parseInt(portEdit.getText()));
             }
         });
@@ -77,7 +80,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 conversation.hangOff();
-                listener.setKeepListening(true);
+//                listener.setKeepListening(true);
                 primaryStage.setScene(waitingScene);
             }
         });
@@ -85,7 +88,7 @@ public class Main extends Application {
         answerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                listener.setKeepListening(false);
+//                listener.setKeepListening(false);
                 primaryStage.setScene(waitingScene);
             }
         });
@@ -94,14 +97,14 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                listener.stop();
+//                listener.stop();
                 System.exit(0);
             }
         });
         primaryStage.setScene(waitingScene);
         primaryStage.show();
 
-        listener.start();
+//        listener.start();
     }
 
 

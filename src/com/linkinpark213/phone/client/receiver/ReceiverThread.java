@@ -55,7 +55,7 @@ public class ReceiverThread extends Thread {
             default:
                 this.setKeepAlive(false);
                 this.conversation.setKeepAlive(false);
-                this.conversation.end();
+//                this.conversation.end();
                 System.out.println("Phone Call Was Hung Off");
         }
     }
