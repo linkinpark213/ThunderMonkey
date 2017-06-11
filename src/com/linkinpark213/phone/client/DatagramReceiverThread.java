@@ -35,6 +35,7 @@ public class DatagramReceiverThread extends Thread {
         while (controller.isInConversation()) {
             byte[] buffer = new byte[1024];
             DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length);
+            System.out.println("Datagram Received.");
             try {
                 datagramSocket.receive(datagramPacket);
                 player.play(datagramPacket.getData());
