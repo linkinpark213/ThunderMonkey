@@ -14,10 +14,10 @@ import java.net.Socket;
  * Created by ooo on 2017/5/2 0002.
  */
 public class Controller {
-    private Text statusText;
+    private Text[] statusTexts;
     private Text localStatusText;
-    private Button dialButton;
-    private Button answerButton;
+    private Button callButton;
+    private Button hangButton;
     private CallInListenerThread callInListenerThread;
     private Dialer dialer;
     private Conversation conversation;
@@ -26,15 +26,16 @@ public class Controller {
     public static final int IN_CONVERSATION = 0;
     public static final int WAITING_FOR_CALL = 1;
     public static final int WAITING_FOR_ANSWER = 2;
+    public static final int CALL_INCOMING = 3;
 
-    public Controller(Text statusText,
+    public Controller(Text[] statusTexts,
                       Text localStatusText,
-                      Button dialButton,
-                      Button answerButton) {
-        this.statusText = statusText;
+                      Button callButton,
+                      Button hangButton) {
+        this.statusTexts = statusTexts;
         this.localStatusText = localStatusText;
-        this.dialButton = dialButton;
-        this.answerButton = answerButton;
+        this.callButton = callButton;
+        this.hangButton = hangButton;
         this.callInListenerThread = new CallInListenerThread(this);
         currentState = WAITING_FOR_CALL;
         callInListenerThread.start();
@@ -42,10 +43,11 @@ public class Controller {
     }
 
     public void callIncoming(Socket socket) {
-        statusText.setText("Call incoming from " + socket.getRemoteSocketAddress() + socket.getPort());
+        for (int i = 0; i < statusTexts.length; i++) {
+            statusTexts[i].setText("Call incoming from " + socket.getRemoteSocketAddress() + socket.getPort());
+        }
+        this.currentState = CALL_INCOMING;
         conversationSocket = socket;
-        dialButton.setDisable(true);
-        answerButton.setDisable(false);
     }
 
     public void answerCall() {
@@ -54,13 +56,18 @@ public class Controller {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
             objectOutputStream.writeObject(new Message(Message.ANSWER, ""));
             startConversation();
+            callButton.setDisable(true);
+            hangButton.setDisable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void cancelCalling() {
-
+    public void cancelDialing() {
+        if (this.currentState == IN_CONVERSATION) {
+            hangOff();
+        } else
+            this.currentState = WAITING_FOR_CALL;
     }
 
     public void hangOff() {
@@ -73,15 +80,23 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        callButton.setDisable(false);
+        hangButton.setDisable(true);
     }
 
     public void callingEnd() {
         currentState = WAITING_FOR_CALL;
+        callButton.setDisable(false);
+        hangButton.setDisable(true);
     }
 
 
     public boolean isListening() {
         return currentState == WAITING_FOR_CALL;
+    }
+
+    public boolean isBeingCalled() {
+        return currentState == CALL_INCOMING;
     }
 
     public boolean isWaitingForAnswer() {
@@ -90,10 +105,6 @@ public class Controller {
 
     public boolean isInConversation() {
         return currentState == IN_CONVERSATION;
-    }
-
-    public void stopListening() {
-        this.currentState = IN_CONVERSATION;
     }
 
     public void keepListening() {
@@ -113,11 +124,9 @@ public class Controller {
         ReceiverThread receiverThread = new ReceiverThread(conversation, this);
         conversationControlThread.start();
         receiverThread.start();
-        stopListening();
-    }
-
-    public void closeConversation() {
-
+        this.currentState = IN_CONVERSATION;
+        callButton.setDisable(true);
+        hangButton.setDisable(false);
     }
 
     public Socket getConversationSocket() {
@@ -126,10 +135,6 @@ public class Controller {
 
     public int getCurrentState() {
         return currentState;
-    }
-
-    public Text getStatusText() {
-        return statusText;
     }
 
     public Text getLocalStatusText() {
@@ -147,7 +152,9 @@ public class Controller {
             return true;
         } else {
             System.out.println("Dialing Error: No Answerer.");
-            statusText.setText("Dialing Error: No Answerer.");
+            for (int i = 0; i < statusTexts.length; i++) {
+                statusTexts[i].setText("Dialing Error: No Answerer.");
+            }
             return false;
         }
     }

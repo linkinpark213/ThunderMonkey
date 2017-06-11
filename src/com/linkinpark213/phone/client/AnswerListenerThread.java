@@ -20,25 +20,27 @@ public class AnswerListenerThread extends Thread {
 
     @Override
     public void run() {
-        while (controller.isWaitingForAnswer()) {
+        while (true) {
+            while (controller.isWaitingForAnswer()) {
             /*
             Waiting for answer
              */
-            try {
-                System.out.println("Waiting for answer");
-                socket = controller.getConversationSocket();
-                ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-                Message message = (Message) objectInputStream.readObject();
-                if (message.getType() == Message.ANSWER) {
-                    System.out.println("Connection Established With " + socket.getRemoteSocketAddress());
-                    controller.stopListening();
-                    System.out.println("" + socket.getRemoteSocketAddress() + "answered.");
-                    controller.startConversation();
+                try {
+                    System.out.println("Waiting for answer");
+                    socket = controller.getConversationSocket();
+                    ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+                    Message message = (Message) objectInputStream.readObject();
+                    if (message.getType() == Message.ANSWER) {
+                        System.out.println("Connection Established With " + socket.getRemoteSocketAddress());
+//                        controller.stopListening();
+                        System.out.println("" + socket.getRemoteSocketAddress() + "answered.");
+                        controller.startConversation();
+                    }
+                } catch (IOException e) {
+                    System.out.println("I/O stream lost.");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                System.out.println("I/O stream lost.");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }
         }
     }
