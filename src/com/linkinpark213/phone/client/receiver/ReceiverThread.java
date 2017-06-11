@@ -1,5 +1,6 @@
 package com.linkinpark213.phone.client.receiver;
 
+import com.linkinpark213.phone.client.Controller;
 import com.linkinpark213.phone.client.Conversation;
 import com.linkinpark213.phone.common.Message;
 import javafx.scene.text.Text;
@@ -12,22 +13,14 @@ import java.net.Socket;
  */
 public class ReceiverThread extends Thread {
     private Conversation conversation;
+    private Controller controller;
     private Socket socket;
-    private boolean keepAlive;
 
-    public ReceiverThread(Conversation conversation) {
+    public ReceiverThread(Conversation conversation, Controller controller) {
         this.conversation = conversation;
+        this.controller = controller;
         this.socket = conversation.getSocket();
-        keepAlive = true;
         System.out.println("Receiver Listening...");
-    }
-
-    public boolean isKeepAlive() {
-        return keepAlive;
-    }
-
-    public void setKeepAlive(boolean keepAlive) {
-        this.keepAlive = keepAlive;
     }
 
     public void messageIncoming(Message message) {
@@ -53,9 +46,7 @@ public class ReceiverThread extends Thread {
                 break;
             case Message.HANG_OFF:
             default:
-                this.setKeepAlive(false);
-                this.conversation.setKeepAlive(false);
-//                this.conversation.end();
+                controller.callingEnd();
                 System.out.println("Phone Call Was Hung Off");
         }
     }
@@ -63,7 +54,7 @@ public class ReceiverThread extends Thread {
     @Override
     public void run() {
         try {
-            while (isKeepAlive()) {
+            while (controller.isInConversation()) {
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
                 Message message = (Message) inputStream.readObject();
                 messageIncoming(message);

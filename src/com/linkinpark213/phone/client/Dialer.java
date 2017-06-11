@@ -1,6 +1,9 @@
 package com.linkinpark213.phone.client;
 
+import com.linkinpark213.phone.common.Message;
+
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
@@ -24,6 +27,8 @@ public class Dialer extends Thread {
     public Socket dial(String address, int port) {
         try {
             socket = new Socket(address, port);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectOutputStream.writeObject(new Message(Message.CALL_REQUEST, ""));
             return socket;
         } catch (IOException e) {
             return null;

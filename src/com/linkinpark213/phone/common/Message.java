@@ -17,7 +17,7 @@ public class Message implements Serializable {
     public final static int SIGN_OUT = 2;
     public final static int SIGN_OUT_GRANT = 3;
     public final static int CALL_REQUEST = 4;
-    public final static int BROADCAST = 5;
+    public final static int ANSWER = 5;
     public final static int INVALID_MESSAGE = 6;
     public final static int SPEAK = 7;
     public final static int HANG_OFF = 8;

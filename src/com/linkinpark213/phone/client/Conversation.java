@@ -19,16 +19,12 @@ import java.net.Socket;
  */
 public class Conversation {
     private Socket socket;
-    private ReceiverThread receiverThread;
     private Recorder recorder;
     private ConversationControlThread conversationControlThread;
-    private boolean keepAlive;
 
-    public Conversation(Socket socket, Listener listener) {
+    public Conversation(Socket socket) {
         this.socket = socket;
-        this.keepAlive = false;
         recorder = new Recorder("cache\\" + socket.getLocalPort());
-        receiverThread = new ReceiverThread(this);
     }
 
     public Socket getSocket() {
@@ -39,17 +35,8 @@ public class Conversation {
         this.socket = socket;
     }
 
-    public boolean isKeepAlive() {
-        return keepAlive;
-    }
-
-    public void setKeepAlive(boolean keepAlive) {
-        this.keepAlive = keepAlive;
-    }
-
     public void hangOff() {
         try {
-            this.setKeepAlive(false);
             ObjectOutputStream outputStream = new ObjectOutputStream(this.getSocket().getOutputStream());
             outputStream.writeObject(new Message(Message.HANG_OFF, ""));
         } catch (IOException e) {
