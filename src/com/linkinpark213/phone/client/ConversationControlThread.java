@@ -1,5 +1,10 @@
 package com.linkinpark213.phone.client;
 
+import com.linkinpark213.phone.common.Message;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 /**
  * Created by ooo on 2017/5/1 0001.
  */
@@ -14,18 +19,34 @@ public class ConversationControlThread extends Thread {
         this.remoteDatagramPort = remoteDatagramPort;
     }
 
+    public void messageIncoming(Message message) {
+        /*
+         * Receive the message and play the sound according to the data.
+         */
+        switch (message.getType()) {
+            case Message.HANG_OFF:
+            default:
+                controller.callingEnd();
+                System.out.println("Phone Call Was Hung Off.");
+        }
+    }
+
+
     @Override
     public void run() {
         while (controller.isInConversation()) {
-            conversation.startRecording();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                conversation.stopRecordingAndSend();
+            conversation.recordAndSend();
+        }
+        try {
+            while (controller.isInConversation()) {
+                ObjectInputStream inputStream = new ObjectInputStream(conversation.getSocket().getInputStream());
+                Message message = (Message) inputStream.readObject();
+                messageIncoming(message);
             }
-            if (controller.isInConversation())
-                conversation.stopRecordingAndSend();
-            else conversation.stopRecordingAndDoNotSend();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+
         }
     }
 }

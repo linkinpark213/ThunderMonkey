@@ -154,12 +154,15 @@ public class Controller {
     }
 
     public void startConversation() {
+        this.currentState = IN_CONVERSATION;
         conversation = new Conversation(conversationSocket, remoteDatagramPort);
         ConversationControlThread conversationControlThread = new ConversationControlThread(conversation, this, remoteDatagramPort);
-        ReceiverThread receiverThread = new ReceiverThread(conversation, this);
+//        ReceiverThread receiverThread = new ReceiverThread(conversation, this);
         conversationControlThread.start();
-        receiverThread.start();
-        this.currentState = IN_CONVERSATION;
+        DatagramReceiverThread datagramReceiverThread = new DatagramReceiverThread(conversation, this, conversationSocket, datagramSocket);
+        datagramReceiverThread.start();
+
+//        receiverThread.start();
         statusText.setText("Conversation Established with " + conversationSocket.getRemoteSocketAddress());
         System.out.println("Conversation Established with " + conversationSocket.getRemoteSocketAddress());
         callButton.setDisable(true);

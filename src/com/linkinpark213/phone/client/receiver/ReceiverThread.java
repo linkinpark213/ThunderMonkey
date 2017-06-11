@@ -28,22 +28,6 @@ public class ReceiverThread extends Thread {
          * Receive the message and play the sound according to the data.
          */
         switch (message.getType()) {
-            case Message.SPEAK:
-                try {
-                    File dir = new File("cache\\" + socket.getLocalPort());
-                    dir.mkdirs();
-                    String fileName = "\\download" + (int) (Math.random() * 65536) + ".wav";
-                    FileOutputStream fileOutputStream = new FileOutputStream(new File("cache\\" + socket.getLocalPort() + fileName));
-                    fileOutputStream.write(message.getAudioByteArray());
-                    fileOutputStream.close();
-                    PlayerThread playerThread = new PlayerThread("cache\\" + socket.getLocalPort() + fileName);
-                    playerThread.start();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
             case Message.HANG_OFF:
             default:
                 controller.callingEnd();

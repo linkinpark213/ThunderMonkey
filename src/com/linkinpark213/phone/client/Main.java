@@ -106,6 +106,7 @@ public class Main extends Application {
                             System.out.println("Dialing..." + ipString + ":" + portString);
                         }
                     } else {
+                        statusText.setText("Invalid IP or Port.");
                         System.out.println("Invalid IP or Port.");
                     }
                 } else if (controller.isBeingCalled()) {

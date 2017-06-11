@@ -12,7 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
+import java.net.*;
 
 /**
  * Created by ooo on 2017/5/1 0001.
@@ -21,12 +21,18 @@ public class Conversation {
     private Socket socket;
     private Recorder recorder;
     private int remoteDatagramPort;
+    private DatagramSocket datagramSocket;
     private ConversationControlThread conversationControlThread;
 
     public Conversation(Socket socket, int remoteDatagramPort) {
         this.socket = socket;
         this.remoteDatagramPort = remoteDatagramPort;
-        recorder = new Recorder("cache\\" + socket.getLocalPort());
+        try {
+            this.datagramSocket = new DatagramSocket();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        recorder = new Recorder();
     }
 
     public Socket getSocket() {
@@ -46,34 +52,14 @@ public class Conversation {
         }
     }
 
-    public void startRecording() {
-        recorder.startRecording();
-    }
-
-    public void stopRecordingAndSend() {
-        recorder.stopRecording();
+    public void recordAndSend() {
+        byte[] record = recorder.record();
+        DatagramPacket datagramPacket = new DatagramPacket(record, record.length, socket.getInetAddress(), remoteDatagramPort);
         try {
-            File dir = new File("cache\\" + socket.getLocalPort());
-            dir.mkdirs();
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("cache\\" + socket.getLocalPort() + "\\record.wav"));
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            try {
-                AudioSystem.write(audioInputStream, AudioFileFormat.Type.AU, byteArrayOutputStream);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            byte[] audioByteArray = byteArrayOutputStream.toByteArray();
-            byteArrayOutputStream.close();
-            audioInputStream.close();
-
-            ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-            outputStream.writeObject(new Message("", audioByteArray));
-        } catch (UnsupportedAudioFileException | IOException e) {
+            datagramSocket.send(datagramPacket);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void stopRecordingAndDoNotSend() {
-        recorder.stopRecording();
-    }
 }
