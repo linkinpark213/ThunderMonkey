@@ -50,14 +50,14 @@ public class Main extends Application {
         waitingState.setAlignment(Pos.CENTER);
 
         ipEdit.setPrefRowCount(0);
-        ipEdit.setPromptText("Enter the IP address");
+        ipEdit.setPromptText("Enter the IP address of the Callee");
         ipEdit.setText("127.0.0.1");
         portEdit.setPrefRowCount(0);
-        portEdit.setPromptText("Port");
+        portEdit.setPromptText("Enter the Control Port of the Callee");
 
-        Image dialImage = new Image(new FileInputStream("icon\\call.png"));
+        Image callImage = new Image(new FileInputStream("icon\\call.png"));
         Image hangImage = new Image(new FileInputStream("icon\\hang.png"));
-        ImageView dialImageView = new ImageView(dialImage);
+        ImageView dialImageView = new ImageView(callImage);
         ImageView hangImageView = new ImageView(hangImage);
         dialImageView.setFitWidth(80);
         dialImageView.setFitHeight(80);
@@ -147,6 +147,7 @@ public class Main extends Application {
                 System.exit(0);
             }
         });
+        primaryStage.getIcons().add(callImage);
         primaryStage.setScene(waitingScene);
         primaryStage.show();
     }
