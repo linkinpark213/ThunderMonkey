@@ -20,33 +20,31 @@ public class AnswerListenerThread extends Thread {
 
     @Override
     public void run() {
-//        while (true) {
-            while (controller.isWaitingForAnswer()) {
+        while (controller.isWaitingForAnswer()) {
             /*
             Waiting for answer
              */
-                try {
-                    System.out.println("Waiting for answer...");
-                    socket = controller.getConversationSocket();
-                    ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-                    Message message = (Message) objectInputStream.readObject();
-                    if (message.getType() == Message.ANSWER) {
-                        System.out.println("Connection Established With " + socket.getRemoteSocketAddress());
-                        System.out.println("" + socket.getRemoteSocketAddress() + " Answered.");
-                        controller.setRemoteDatagramPort(message.getDatagramPort());
-                        controller.startConversation();
-                    } else if (message.getType() == Message.CALL_REFUSE) {
-                        System.out.println("" + socket.getRemoteSocketAddress() + " Refused to Answer.");
-                        controller.setStatus("" + socket.getRemoteSocketAddress() + " Refused to Answer.");
-                        socket.close();
-                        controller.callingRefused();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Socket Closed.");
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+            try {
+                System.out.println("Waiting for answer...");
+                socket = controller.getConversationSocket();
+                ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+                Message message = (Message) objectInputStream.readObject();
+                if (message.getType() == Message.ANSWER) {
+                    System.out.println("Connection Established With " + socket.getRemoteSocketAddress());
+                    System.out.println("" + socket.getRemoteSocketAddress() + " Answered.");
+                    controller.setRemoteDatagramPort(message.getDatagramPort());
+                    controller.startConversation();
+                } else if (message.getType() == Message.CALL_REFUSE) {
+                    System.out.println("" + socket.getRemoteSocketAddress() + " Refused to Answer.");
+                    controller.setStatus("" + socket.getRemoteSocketAddress() + " Refused to Answer.");
+                    socket.close();
+                    controller.callingRefused();
                 }
+            } catch (IOException e) {
+                System.out.println("Socket Closed.");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-//        }
+        }
     }
 }
