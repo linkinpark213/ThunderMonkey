@@ -6,30 +6,28 @@ import javax.sound.sampled.*;
  * Created by ooo on 2017/5/1 0001.
  */
 public class Recorder {
-    private AudioFormat audioFormat;
+    private static final AudioFormat AUDIO_FORMAT;
     private TargetDataLine targetDataLine;
+
+    static {
+        AUDIO_FORMAT = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+                8000f,
+                16,
+                1,
+                2,
+                8000f,
+                true);
+    }
 
     public Recorder() {
         try {
-            audioFormat = getDefaultAudioFormat();
-            DataLine.Info targetDataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
+            DataLine.Info targetDataLineInfo = new DataLine.Info(TargetDataLine.class, AUDIO_FORMAT);
             targetDataLine = (TargetDataLine) AudioSystem.getLine(targetDataLineInfo);
-            targetDataLine.open(audioFormat);
+            targetDataLine.open(AUDIO_FORMAT);
             targetDataLine.start();
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-    }
-
-    public AudioFormat getDefaultAudioFormat() {
-        AudioFormat.Encoding encoding = AudioFormat.Encoding.PCM_SIGNED;
-        float rate = 8000f;
-        int sampleSize = 16;
-        String signedString = "signed";
-        boolean bigEndian = true;
-        int channels = 1;
-        return new AudioFormat(encoding, rate, sampleSize, channels,
-                (sampleSize / 8) * channels, rate, bigEndian);
     }
 
     public byte[] record() {

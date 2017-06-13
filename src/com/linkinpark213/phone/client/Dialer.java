@@ -16,14 +16,6 @@ import java.net.Socket;
 public class Dialer extends Thread {
     private Socket socket;
 
-    public Socket getSocket() {
-        return socket;
-    }
-
-    public void setSocket(Socket socket) {
-        this.socket = socket;
-    }
-
     public Socket dial(String address, int port, int datagramPort) {
         try {
             socket = new Socket(address, port);

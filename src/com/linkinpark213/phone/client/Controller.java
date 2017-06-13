@@ -70,9 +70,7 @@ public class Controller {
         } catch (IOException e) {
             statusText.setText("The Other User Canceled Calling.");
             System.out.println("The Other User Canceled Calling.");
-            currentState = WAITING_FOR_CALL;
-            callButton.setDisable(false);
-            hangButton.setDisable(true);
+            waitForCall();
         }
     }
 
@@ -231,15 +229,22 @@ public class Controller {
     }
 
     public boolean dial(String address, int port) {
-        Socket socket = dialer.dial(address, port, datagramSocket.getLocalPort());
-        if (socket != null) {
-            System.out.println("Local Address & Port: " + socket.getLocalAddress() + ":" + socket.getLocalPort());
-            this.waitForAnswer(socket);
-            return true;
-        } else {
-            System.out.println("Dialing Error: Remote Answerer Address Not Found.");
-            statusText.setText("Dialing Error: Remote Answerer Address Not Found.");
-            return false;
+        try {
+            Socket socket = new Socket(address, port);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectOutputStream.writeObject(new Message(Message.CALL_REQUEST, datagramSocket.getLocalPort()));
+            if (socket != null) {
+                System.out.println("Local Address & Port: " + socket.getLocalAddress() + ":" + socket.getLocalPort());
+                this.waitForAnswer(socket);
+                return true;
+            } else {
+                System.out.println("Dialing Error: Remote Answerer Address Not Found.");
+                statusText.setText("Dialing Error: Remote Answerer Address Not Found.");
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 }

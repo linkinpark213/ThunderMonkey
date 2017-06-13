@@ -1,23 +1,29 @@
 package com.linkinpark213.phone.client.receiver;
 
 import javax.sound.sampled.*;
-import java.io.EOFException;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by ooo on 2017/5/1 0001.
  */
 public class Player {
-    private AudioFormat audioFormat;
+    private static final AudioFormat AUDIO_FORMAT;
     private SourceDataLine sourceDataLine;
+
+    static {
+        AUDIO_FORMAT = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+                8000f,
+                16,
+                1,
+                2,
+                8000f,
+                true);
+    }
 
     public Player() {
         try {
-            audioFormat = getDefaultAudioFormat();
-            DataLine.Info sourceDataLineInfo = new DataLine.Info(SourceDataLine.class, audioFormat);
+            DataLine.Info sourceDataLineInfo = new DataLine.Info(SourceDataLine.class, AUDIO_FORMAT);
             sourceDataLine = (SourceDataLine) AudioSystem.getLine(sourceDataLineInfo);
-            sourceDataLine.open(audioFormat);
+            sourceDataLine.open(AUDIO_FORMAT);
             sourceDataLine.start();
         } catch (LineUnavailableException e) {
             e.printStackTrace();
