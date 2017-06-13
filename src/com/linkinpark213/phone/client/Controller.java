@@ -52,6 +52,8 @@ public class Controller {
                 + "\nRemote Datagram Socket is " + datagramPort);
         this.currentState = CALL_INCOMING;
         conversationSocket = socket;
+        CallerCancelListenerThread callerCancelListenerThread = new CallerCancelListenerThread(this);
+        callerCancelListenerThread.start();
         hangButton.setDisable(false);
     }
 
@@ -79,6 +81,9 @@ public class Controller {
             hangOff();
         } else {
             try {
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
+                objectOutputStream.writeObject(new Message(Message.CALL_CANCEL, ""));
+//                Thread.sleep(500);
                 conversationSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
