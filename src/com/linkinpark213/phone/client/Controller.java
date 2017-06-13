@@ -83,7 +83,6 @@ public class Controller {
             try {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
                 objectOutputStream.writeObject(new Message(Message.CALL_CANCEL, ""));
-//                Thread.sleep(500);
                 conversationSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
