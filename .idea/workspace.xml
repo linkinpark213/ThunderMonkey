@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -67,8 +68,8 @@
           <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="339">
-                  <caret line="95" column="5" lean-forward="true" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
+                <state relative-caret-position="356">
+                  <caret line="147" column="26" lean-forward="false" selection-start-line="147" selection-start-column="26" selection-end-line="147" selection-end-column="26" />
                   <folding>
                     <element signature="docComment;class#Controller#0" expanded="false" />
                     <element signature="method#Controller#0;class#Controller#0" expanded="false" />
@@ -100,7 +101,7 @@
           <file leaf-file-name="CallerCancelListenerThread.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallerCancelListenerThread.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="521">
+                <state relative-caret-position="554">
                   <caret line="30" column="17" lean-forward="true" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -112,8 +113,8 @@
           <file leaf-file-name="CallInListenerThread.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="456">
-                  <caret line="58" column="22" lean-forward="true" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
+                <state relative-caret-position="832">
+                  <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -192,7 +193,7 @@
           <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Main.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="552">
+                <state relative-caret-position="742">
                   <caret line="145" column="17" lean-forward="true" selection-start-line="145" selection-start-column="17" selection-end-line="145" selection-end-column="17" />
                   <folding />
                 </state>
@@ -302,7 +303,6 @@
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/receiver/DatagramReceiverThread.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/ConversationControlThread.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/DatagramSenderThread.java" />
-        <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/speaker/Recorder.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/receiver/Player.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/DatagramReceiverThread.java" />
@@ -311,6 +311,7 @@
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Main.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/AnswerListenerThread.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallerCancelListenerThread.java" />
+        <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java" />
         <option value="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java" />
       </list>
     </option>
@@ -944,7 +945,7 @@
       <workItem from="1497196881261" duration="4468000" />
       <workItem from="1497236306241" duration="26000" />
       <workItem from="1497236385108" duration="1535000" />
-      <workItem from="1497360927752" duration="4501000" />
+      <workItem from="1497360927752" duration="5337000" />
     </task>
     <task id="LOCAL-00001" summary="Second Initial Commit">
       <created>1493626748026</created>
@@ -1072,11 +1073,18 @@
       <option name="project" value="LOCAL" />
       <updated>1497366584059</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="a /**/ deleted">
+      <created>1497367029335</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1497367029335</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64740000" />
+    <option name="totallyTimeSpent" value="65576000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1101,14 +1109,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295211" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295211" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24841772" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24841772" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16455697" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27459407" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22231013" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22231013" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1190,7 +1198,8 @@
     <MESSAGE value="program icon" />
     <MESSAGE value="deleted /**/" />
     <MESSAGE value="cancel calling causes the callee's side to react" />
-    <option name="LAST_COMMIT_MESSAGE" value="cancel calling causes the callee's side to react" />
+    <MESSAGE value="a /**/ deleted" />
+    <option name="LAST_COMMIT_MESSAGE" value="a /**/ deleted" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1447,14 +1456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="58" column="22" lean-forward="true" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/DatagramSenderThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="596">
@@ -1485,19 +1486,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
+        <state relative-caret-position="742">
           <caret line="145" column="17" lean-forward="true" selection-start-line="145" selection-start-column="17" selection-end-line="145" selection-end-column="17" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallerCancelListenerThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="30" column="17" lean-forward="true" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1509,10 +1500,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallerCancelListenerThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="30" column="17" lean-forward="true" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="832">
+          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="95" column="5" lean-forward="true" selection-start-line="95" selection-start-column="5" selection-end-line="95" selection-end-column="5" />
+        <state relative-caret-position="356">
+          <caret line="147" column="26" lean-forward="false" selection-start-line="147" selection-start-column="26" selection-end-line="147" selection-end-column="26" />
           <folding>
             <element signature="docComment;class#Controller#0" expanded="false" />
             <element signature="method#Controller#0;class#Controller#0" expanded="false" />

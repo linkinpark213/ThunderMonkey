@@ -131,7 +131,7 @@ public class Controller {
         try {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
             objectOutputStream.writeObject(new Message(Message.CALL_REFUSE, ""));
-//            conversationSocket.close();
+            conversationSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -180,14 +180,6 @@ public class Controller {
 
     public Socket getConversationSocket() {
         return conversationSocket;
-    }
-
-    public int getCurrentState() {
-        return currentState;
-    }
-
-    public Text getLocalStatusText() {
-        return localStatusText;
     }
 
     public void setLocalStatus(String localStatus) {

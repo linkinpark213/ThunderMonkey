@@ -55,30 +55,29 @@ public class CallInListenerThread extends Thread {
     public void run() {
         while (true) {
             while (controller.isListening()) {
-                if (controller.getCurrentState() == Controller.WAITING_FOR_CALL) {
                     /*
                     Waiting for call
                      */
-                    try {
-                        socket = serverSocket.accept();
-                        if (controller.isListening()) {
-                            System.out.println("Connection Established With " + socket.getRemoteSocketAddress());
-                            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-                            Message message = (Message) objectInputStream.readObject();
-                            if (message.getType() == Message.CALL_REQUEST) {
-                                System.out.println("Call coming From " + socket.getRemoteSocketAddress()
-                                        + "\nRemote Datagram Socket is " + message.getDatagramPort());
-                                controller.callIncoming(socket, message.getDatagramPort());
-                            }
+                try {
+                    socket = serverSocket.accept();
+                    if (controller.isListening()) {
+                        System.out.println("Connection Established With " + socket.getRemoteSocketAddress());
+                        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+                        Message message = (Message) objectInputStream.readObject();
+                        if (message.getType() == Message.CALL_REQUEST) {
+                            System.out.println("Call coming From " + socket.getRemoteSocketAddress()
+                                    + "\nRemote Datagram Socket is " + message.getDatagramPort());
+                            controller.callIncoming(socket, message.getDatagramPort());
                         }
-                    } catch (SocketException e) {
-                        System.out.println("Connection Lost.");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
                     }
+                } catch (SocketException e) {
+                    System.out.println("Connection Lost.");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
+
             }
         }
     }
