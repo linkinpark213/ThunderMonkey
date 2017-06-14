@@ -19,7 +19,6 @@ public class Controller {
     private Text localStatusText;
     private Button callButton;
     private Button hangButton;
-    private Dialer dialer;
     private Conversation conversation;
     private Socket conversationSocket;
     private ServerSocket serverSocket;
@@ -29,6 +28,7 @@ public class Controller {
     private DatagramReceiverThread datagramReceiverThread;
     private DatagramSenderThread datagramSenderThread;
     private CallerCancelListenerThread callerCancelListenerThread;
+    private CallInListenerThread callInListenerThread;
     private int currentState;
     private int remoteDatagramPort;
     public static final int IN_CONVERSATION = 0;
@@ -44,10 +44,9 @@ public class Controller {
         this.localStatusText = localStatusText;
         this.callButton = callButton;
         this.hangButton = hangButton;
-        CallInListenerThread callInListenerThread = new CallInListenerThread(this);
+        callInListenerThread = new CallInListenerThread(this);
         currentState = WAITING_FOR_CALL;
         callInListenerThread.start();
-        this.dialer = new Dialer();
     }
 
     public void callIncoming(Socket socket, int datagramPort) {
@@ -110,8 +109,11 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Hanging Off. Step 1");
         callButton.setDisable(false);
+        System.out.println("Hanging Off. Step 2");
         hangButton.setDisable(true);
+        System.out.println("Hanging Off. Step 3");
     }
 
     public void callingEnd() {
