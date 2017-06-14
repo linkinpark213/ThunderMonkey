@@ -37,6 +37,7 @@ public class DatagramReceiverThread extends Thread {
             DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length);
             try {
                 datagramSocket.receive(datagramPacket);
+                System.out.println("Datagram Received from " + datagramPacket.getSocketAddress());
                 player.play(datagramPacket.getData());
             } catch (IOException e) {
                 e.printStackTrace();
