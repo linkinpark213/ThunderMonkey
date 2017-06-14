@@ -55,9 +55,9 @@ public class Conversation {
         byte[] record = recorder.record();
         InetSocketAddress socketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
         System.out.println("Remote Address: " + socketAddress.getAddress());
-        DatagramPacket datagramPacket = new DatagramPacket(record, record.length, socket.getInetAddress(), remoteDatagramPort);
+        DatagramPacket datagramPacket = new DatagramPacket(record, record.length, socketAddress.getAddress(), remoteDatagramPort);
 
-        System.out.println("Datagram Sent to " + remoteDatagramPort);
+        System.out.println("Datagram Sent to " + socketAddress.getAddress() + " : " + remoteDatagramPort);
         try {
             datagramSocket.send(datagramPacket);
         } catch (IOException e) {

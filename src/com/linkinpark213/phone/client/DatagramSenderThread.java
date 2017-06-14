@@ -24,7 +24,6 @@ public class DatagramSenderThread extends Thread {
     public void run() {
         while (controller.isInConversation()) {
             conversation.recordAndSend();
-            System.out.println("Datagram Sent to " + controller.getRemoteDatagramPort());
         }
         conversation.close();
     }
