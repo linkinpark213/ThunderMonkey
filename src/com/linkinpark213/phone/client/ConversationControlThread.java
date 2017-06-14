@@ -19,31 +19,20 @@ public class ConversationControlThread extends Thread {
         this.remoteDatagramPort = remoteDatagramPort;
     }
 
-    public void messageIncoming(Message message) {
-        /*
-         * Receive the message and play the sound according to the data.
-         */
-        switch (message.getType()) {
-            case Message.HANG_OFF:
-            default:
-                controller.callingEnd();
-                System.out.println("Phone Call Was Hung Off.");
-        }
-    }
-
-
     @Override
     public void run() {
         try {
             while (controller.isInConversation()) {
                 ObjectInputStream inputStream = new ObjectInputStream(conversation.getSocket().getInputStream());
                 Message message = (Message) inputStream.readObject();
-                messageIncoming(message);
+                if (message.getType() == Message.HANG_OFF) {
+                    controller.callingEnd();
+                }
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-
+            controller.callingEnd();
         }
     }
 }

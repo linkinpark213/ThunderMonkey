@@ -22,6 +22,7 @@ public class CallerCancelListenerThread extends Thread {
     public void run() {
         while(controller.isBeingCalled()) {
             try {
+                System.out.println("Listening if caller cancels");
                 ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                 Message message = (Message) objectInputStream.readObject();
                 if(message.getType() == Message.CALL_CANCEL) {

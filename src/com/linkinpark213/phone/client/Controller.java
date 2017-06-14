@@ -25,6 +25,10 @@ public class Controller {
     private ServerSocket serverSocket;
     private DatagramSocket datagramSocket;
     private AnswerListenerThread answerListenerThread;
+    private ConversationControlThread conversationControlThread;
+    private DatagramReceiverThread datagramReceiverThread;
+    private DatagramSenderThread datagramSenderThread;
+    private CallerCancelListenerThread callerCancelListenerThread;
     private int currentState;
     private int remoteDatagramPort;
     public static final int IN_CONVERSATION = 0;
@@ -52,7 +56,7 @@ public class Controller {
                 + "\nRemote Datagram Socket is " + datagramPort);
         this.currentState = CALL_INCOMING;
         conversationSocket = socket;
-        CallerCancelListenerThread callerCancelListenerThread = new CallerCancelListenerThread(this);
+        callerCancelListenerThread = new CallerCancelListenerThread(this);
         callerCancelListenerThread.start();
         hangButton.setDisable(false);
     }
@@ -60,6 +64,7 @@ public class Controller {
     public void answerCall() {
         statusText.setText("You Answered the Phone.");
         System.out.println("You Answered the Phone.");
+        this.callerCancelListenerThread.stop();
         ObjectOutputStream objectOutputStream = null;
         try {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
@@ -111,8 +116,8 @@ public class Controller {
 
     public void callingEnd() {
         currentState = WAITING_FOR_CALL;
-        statusText.setText("The Other User Hung Off.");
-        System.out.println("The Other User Hung Off.");
+        statusText.setText("Phone Call was Hung Off.");
+        System.out.println("Phone Call was Hung Off.");
         try {
             conversationSocket.close();
         } catch (IOException e) {
@@ -125,6 +130,7 @@ public class Controller {
     public void refuseToAnswer() {
         statusText.setText("You Refused to Answer.");
         System.out.println("You Refused to Answer.");
+        this.callerCancelListenerThread.stop();
         ObjectOutputStream objectOutputStream = null;
         try {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
@@ -159,11 +165,11 @@ public class Controller {
     public void startConversation() {
         this.currentState = IN_CONVERSATION;
         conversation = new Conversation(conversationSocket, remoteDatagramPort);
-        ConversationControlThread conversationControlThread = new ConversationControlThread(conversation, this, remoteDatagramPort);
+        conversationControlThread = new ConversationControlThread(conversation, this, remoteDatagramPort);
         conversationControlThread.start();
-        DatagramReceiverThread datagramReceiverThread = new DatagramReceiverThread(conversation, this, conversationSocket, datagramSocket);
+        datagramReceiverThread = new DatagramReceiverThread(conversation, this, conversationSocket, datagramSocket);
         datagramReceiverThread.start();
-        DatagramSenderThread datagramSenderThread = new DatagramSenderThread(conversation, this, remoteDatagramPort);
+        datagramSenderThread = new DatagramSenderThread(conversation, this, remoteDatagramPort);
         datagramSenderThread.start();
 
         statusText.setText("Conversation Established with " + conversationSocket.getRemoteSocketAddress());
