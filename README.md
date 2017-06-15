@@ -10,7 +10,7 @@ P2P only, no server needed.
 
 ## Implementation
 ### Finite State Machine
-![Should be an image here!](./img/FSM.png)
+![Oops, there should be an image here! Please pretend that there is one.](./img/FSM.png)
 
 ### Threads
 Besides main thread, the following states run during these states.
@@ -32,4 +32,4 @@ Besides main thread, the following states run during these states.
 * When caller hangs off during a conversation, a JavaFX Application Exception probably arises.
 * The callee sometimes can't sense any calling request. (Usually after a successful conversation. May be a thread synchronization issue.)
 
-Whoever finds the issue, please contact me @<linkinpark213@outlook.com>
+Whoever solves the issue, please contact me @<linkinpark213@outlook.com>
