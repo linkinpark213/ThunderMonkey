@@ -48,7 +48,6 @@ public class DatagramReceiverThread extends Thread {
 
                 try {
                     byte[] decrypted = RSAUtil.decrypt(keyPair.getPrivate(), message);
-                    System.out.println("Decrypted message. Length: " + decrypted.length);
 
                     byte[] record = new byte[1024];
 

@@ -86,8 +86,8 @@
           <file leaf-file-name="DatagramReceiverThread.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/DatagramReceiverThread.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="600">
-                  <caret line="52" column="51" lean-forward="true" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
+                <state relative-caret-position="480">
+                  <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -765,7 +765,7 @@
       <workItem from="1499088289985" duration="13000" />
       <workItem from="1515324323632" duration="401000" />
       <workItem from="1515324963473" duration="8479000" />
-      <workItem from="1515335473853" duration="61000" />
+      <workItem from="1515335473853" duration="138000" />
     </task>
     <task id="LOCAL-00001" summary="Second Initial Commit">
       <created>1493626748026</created>
@@ -963,11 +963,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515334103183</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="added RSA. fatal problems remain">
+      <created>1515335555140</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1515335555140</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86502000" />
+    <option name="totallyTimeSpent" value="86579000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1273,6 +1280,7 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="384">
             <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -1411,8 +1419,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/DatagramReceiverThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="52" column="51" lean-forward="true" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
+        <state relative-caret-position="480">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding />
         </state>
       </provider>
