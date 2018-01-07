@@ -67,6 +67,8 @@ public class CallInListenerThread extends Thread {
                         if (message.getType() == Message.CALL_REQUEST) {
                             System.out.println("Call coming From " + socket.getRemoteSocketAddress()
                                     + "\nRemote Datagram Socket is " + message.getDatagramPort());
+                            System.out.println("Public Key: " + message.getPublicKey());
+                            controller.setPeerPublicKey(message.getPublicKey());
                             controller.callIncoming(socket, message.getDatagramPort());
                         }
                     }

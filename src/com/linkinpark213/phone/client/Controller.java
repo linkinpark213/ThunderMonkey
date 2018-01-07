@@ -1,6 +1,8 @@
 package com.linkinpark213.phone.client;
 
+import com.linkinpark213.phone.common.EncryptException;
 import com.linkinpark213.phone.common.Message;
+import com.linkinpark213.phone.common.RSAUtil;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
@@ -9,6 +11,8 @@ import java.io.ObjectOutputStream;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.KeyPair;
+import java.security.PublicKey;
 
 
 /**
@@ -31,6 +35,8 @@ public class Controller {
     private CallInListenerThread callInListenerThread;
     private int currentState;
     private int remoteDatagramPort;
+    private KeyPair keyPair;
+    private PublicKey peerPublicKey;
     public static final int IN_CONVERSATION = 0;
     public static final int WAITING_FOR_CALL = 1;
     public static final int WAITING_FOR_ANSWER = 2;
@@ -39,11 +45,12 @@ public class Controller {
     public Controller(Text statusText,
                       Text localStatusText,
                       Button callButton,
-                      Button hangButton) {
+                      Button hangButton) throws EncryptException {
         this.statusText = statusText;
         this.localStatusText = localStatusText;
         this.callButton = callButton;
         this.hangButton = hangButton;
+        this.keyPair = RSAUtil.generateKeyPair();
         callInListenerThread = new CallInListenerThread(this);
         currentState = WAITING_FOR_CALL;
         callInListenerThread.start();
@@ -67,7 +74,7 @@ public class Controller {
         ObjectOutputStream objectOutputStream = null;
         try {
             objectOutputStream = new ObjectOutputStream(conversationSocket.getOutputStream());
-            objectOutputStream.writeObject(new Message(Message.ANSWER, datagramSocket.getLocalPort()));
+            objectOutputStream.writeObject(new Message(Message.ANSWER, datagramSocket.getLocalPort(), keyPair.getPublic()));
             startConversation();
             callButton.setDisable(true);
             hangButton.setDisable(false);
@@ -166,10 +173,10 @@ public class Controller {
 
     public void startConversation() {
         this.currentState = IN_CONVERSATION;
-        conversation = new Conversation(conversationSocket, remoteDatagramPort);
+        conversation = new Conversation(conversationSocket, remoteDatagramPort, keyPair, peerPublicKey);
         conversationControlThread = new ConversationControlThread(conversation, this, remoteDatagramPort);
         conversationControlThread.start();
-        datagramReceiverThread = new DatagramReceiverThread(conversation, this, conversationSocket, datagramSocket);
+        datagramReceiverThread = new DatagramReceiverThread(conversation, this, conversationSocket, datagramSocket, keyPair);
         datagramReceiverThread.start();
         datagramSenderThread = new DatagramSenderThread(conversation, this, remoteDatagramPort);
         datagramSenderThread.start();
@@ -236,11 +243,20 @@ public class Controller {
         this.remoteDatagramPort = remoteDatagramPort;
     }
 
+    public PublicKey getPeerPublicKey() {
+        return peerPublicKey;
+    }
+
+    public void setPeerPublicKey(PublicKey peerPublicKey) {
+        this.peerPublicKey = peerPublicKey;
+    }
+
     public boolean dial(String address, int port) {
         try {
             Socket socket = new Socket(address, port);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            objectOutputStream.writeObject(new Message(Message.CALL_REQUEST, datagramSocket.getLocalPort()));
+            System.out.println("Requesting Call, local port is : " + datagramSocket.getLocalPort());
+            objectOutputStream.writeObject(new Message(Message.CALL_REQUEST, datagramSocket.getLocalPort(), this.keyPair.getPublic()));
             if (socket != null) {
                 System.out.println("Local Address & Port: " + socket.getLocalAddress() + ":" + socket.getLocalPort());
                 this.waitForAnswer(socket);

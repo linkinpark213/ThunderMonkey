@@ -7,6 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.security.PublicKey;
+import java.util.Map;
 
 /**
  * Created by ooo on 2017/4/29 0029.
@@ -21,6 +23,7 @@ public class Message implements Serializable {
     private int type;
     private String content;
     private int datagramPort;
+    private PublicKey publicKey;
 
     public int getDatagramPort() {
         return datagramPort;
@@ -48,6 +51,14 @@ public class Message implements Serializable {
         this.type = type;
     }
 
+    public PublicKey getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(PublicKey publicKey) {
+        this.publicKey = publicKey;
+    }
+
     public byte[] getAudioByteArray() {
         return audioByteArray;
     }
@@ -61,6 +72,15 @@ public class Message implements Serializable {
         this.content = content;
         this.audioByteArray = null;
         this.datagramPort = 0;
+        this.publicKey = null;
+    }
+
+    public Message(int type, int port, PublicKey publicKey) {
+        this.type = type;
+        this.content = null;
+        this.audioByteArray = null;
+        this.datagramPort = port;
+        this.publicKey = publicKey;
     }
 
     public Message(int type, int port) {
@@ -68,6 +88,7 @@ public class Message implements Serializable {
         this.content = "";
         this.audioByteArray = null;
         this.datagramPort = port;
+        this.publicKey = null;
     }
 
     public Message(String content, byte[] bytes) {
@@ -75,5 +96,7 @@ public class Message implements Serializable {
         this.content = content;
         this.audioByteArray = bytes;
         this.datagramPort = 0;
+        this.publicKey = null;
     }
+
 }

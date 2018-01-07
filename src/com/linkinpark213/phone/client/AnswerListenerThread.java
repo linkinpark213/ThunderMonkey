@@ -32,6 +32,8 @@ public class AnswerListenerThread extends Thread {
                 if (message.getType() == Message.ANSWER) {
                     System.out.println("Connection Established With " + socket.getRemoteSocketAddress());
                     System.out.println("" + socket.getRemoteSocketAddress() + " Answered.");
+                    System.out.println("Public Key is: " + message.getPublicKey());
+                    controller.setPeerPublicKey(message.getPublicKey());
                     controller.setRemoteDatagramPort(message.getDatagramPort());
                     controller.startConversation();
                 } else if (message.getType() == Message.CALL_REFUSE) {
