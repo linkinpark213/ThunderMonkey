@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="edited readme.md">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/common/ByteArrayUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/common/EncryptException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/common/MD5Util.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/common/RSAUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GUI_IP_Phone.iml" afterPath="$PROJECT_DIR$/GUI_IP_Phone.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/AnswerListenerThread.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/AnswerListenerThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/CallInListenerThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/DatagramReceiverThread.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/client/DatagramReceiverThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/linkinpark213/phone/common/Message.java" afterPath="$PROJECT_DIR$/src/com/linkinpark213/phone/common/Message.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,7 +69,7 @@
           <file leaf-file-name="Conversation.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="622">
+                <state relative-caret-position="624">
                   <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
                   <folding>
                     <element signature="docComment;class#Conversation#0" expanded="false" />
@@ -93,12 +82,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
           <file leaf-file-name="DatagramReceiverThread.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/DatagramReceiverThread.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="670">
-                  <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+                <state relative-caret-position="600">
+                  <caret line="52" column="51" lean-forward="true" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
                   <folding />
                 </state>
               </provider>
@@ -775,7 +764,8 @@
       <workItem from="1499069774825" duration="426000" />
       <workItem from="1499088289985" duration="13000" />
       <workItem from="1515324323632" duration="401000" />
-      <workItem from="1515324963473" duration="8422000" />
+      <workItem from="1515324963473" duration="8479000" />
+      <workItem from="1515335473853" duration="61000" />
     </task>
     <task id="LOCAL-00001" summary="Second Initial Commit">
       <created>1493626748026</created>
@@ -966,11 +956,18 @@
       <option name="project" value="LOCAL" />
       <updated>1497502891875</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="added RSA. fatal problems remain">
+      <created>1515334103183</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1515334103183</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86384000" />
+    <option name="totallyTimeSpent" value="86502000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -993,14 +990,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883242" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24781573" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24781573" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883242" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16441621" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21606119" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22160445" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1020,6 +1016,7 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32999045" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22160445" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1067,7 +1064,6 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="mission heavy and road far" />
     <MESSAGE value="at least i can finally speak" />
     <MESSAGE value="ignored the issue that SocketException arouses when a client exits" />
     <MESSAGE value="some improvements on the UI" />
@@ -1092,7 +1088,8 @@
     <MESSAGE value="caller still can't receive?" />
     <MESSAGE value="updated readme.md" />
     <MESSAGE value="edited readme.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="edited readme.md" />
+    <MESSAGE value="added RSA. fatal problems remain" />
+    <option name="LAST_COMMIT_MESSAGE" value="added RSA. fatal problems remain" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1276,7 +1273,6 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="384">
             <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -1286,10 +1282,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#135#136#0" expanded="true" />
-            <element signature="e#165#166#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1323,7 +1315,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="379">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1409,7 +1400,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/Conversation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
+        <state relative-caret-position="624">
           <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
             <element signature="docComment;class#Conversation#0" expanded="false" />
@@ -1420,8 +1411,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/linkinpark213/phone/client/DatagramReceiverThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state relative-caret-position="600">
+          <caret line="52" column="51" lean-forward="true" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
           <folding />
         </state>
       </provider>

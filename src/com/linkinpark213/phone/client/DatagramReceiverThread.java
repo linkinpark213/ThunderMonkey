@@ -38,7 +38,7 @@ public class DatagramReceiverThread extends Thread {
     @Override
     public void run() {
         while (controller.isInConversation()) {
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[1280];
             DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length);
             try {
                 datagramSocket.receive(datagramPacket);
