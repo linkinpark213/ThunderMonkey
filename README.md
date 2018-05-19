@@ -13,7 +13,7 @@ P2P only, no server needed.
 ![Oops, there should be an image here! Please pretend that there is one.](./img/FSM.png)
 
 ### Threads
-Besides main thread, the following states run during these states.
+Besides main thread, the following threads run during these states.
 * WAIT_FOR_CALL state: 
     * CallInListenerThread
     
